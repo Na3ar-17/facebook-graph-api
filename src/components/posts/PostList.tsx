@@ -36,14 +36,14 @@ export const PostList = () => {
   return (
     <ul className='space-y-4'>
       {posts.map(post => (
-        <li key={post.id} className='border rounded p-4'>
+        <li
+          key={post.id}
+          className='border rounded p-4'
+        >
           <p className='mb-2'>{post.message || 'No message'}</p>
-          <p className='text-sm text-gray-500'>
-            {new Date(post.created_time).toLocaleString()}
-          </p>
+          <p className='text-sm text-gray-500'>{new Date(post.created_time).toLocaleString()}</p>
         </li>
       ))}
     </ul>
   )
 }
-
