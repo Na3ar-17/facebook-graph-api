@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
 			body: new URLSearchParams({
 				client_id: process.env.FACEBOOK_APP_ID!,
 				client_secret: process.env.FACEBOOK_APP_SECRET!,
-				redirect_uri: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/auth/facebook/callback`,
+				redirect_uri: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/facebook/callback`,
 				code
 			})
 		})
