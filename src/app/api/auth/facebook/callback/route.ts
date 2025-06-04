@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { BASE_URL } from '@/constants/api.constant'
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const code = searchParams.get('code')
@@ -18,7 +20,7 @@ export async function GET(request: NextRequest) {
       body: new URLSearchParams({
         client_id: process.env.FACEBOOK_APP_ID!,
         client_secret: process.env.FACEBOOK_APP_SECRET!,
-        redirect_uri: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/facebook/callback`,
+        redirect_uri: `${BASE_URL}/api/auth/facebook/callback`,
         code
       })
     })
