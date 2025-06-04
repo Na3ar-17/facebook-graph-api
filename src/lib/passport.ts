@@ -6,8 +6,8 @@ import type { IUser } from '@/entities/user.entity'
 passport.use(
   new FacebookStrategy(
     {
-      clientID: process.env.FACEBOOK_APP_ID!,
-      clientSecret: process.env.FACEBOOK_APP_SECRET!,
+      clientID: process.env.FACEBOOK_APP_ID || '',
+      clientSecret: process.env.FACEBOOK_APP_SECRET || '',
       callbackURL: '/api/auth/facebook/callback',
       profileFields: ['id', 'displayName', 'photos', 'email']
     },
