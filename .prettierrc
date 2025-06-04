@@ -7,7 +7,7 @@
 	"jsxSingleQuote": true,
 	"arrowParens": "avoid",
 	"singleAttributePerLine": true,
-	"printWidth": 150,
+	"printWidth": 100,
 	"proseWrap": "always",
 	"bracketSpacing": true,
 	"importOrder": [
@@ -20,7 +20,8 @@
 		"^@/hooks/(.*)$",
 		"^@/utils/(.*)$",
 		"^@/api/(.*)$",
-		"^@/server/(.*)$"
+		"^@/server/(.*)$",
+		"^@/entities/(.*)$"
 	],
 	"importOrderSeparation": true,
 	"importOrderSortSpecifiers": true,
