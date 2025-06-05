@@ -79,10 +79,9 @@ The following environment variables are required for the application to function
    - Add the following **Valid OAuth Redirect URIs**:
      - `http://localhost:3000/api/auth/facebook/callback`
    - Configure the following **App Permissions**:
+     - `user_posts`
      - `email`
-     - `pages_read_engagement`
-     - `pages_manage_posts`
-     - `publish_to_groups`
+     - `public_profile`
 
 5. **Run the development server**
 
@@ -157,7 +156,6 @@ src/
 For development and testing:
 
 - Create test users in your Facebook App dashboard
-- The interviewer with ID `61559954890699` must be added as a test user for the Meta app
 - Test users can access all app features without app review
 
 ## 🚀 Deployment
