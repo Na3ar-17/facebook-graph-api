@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
 
     if (tokenData.error) {
       return NextResponse.redirect(
-        new URL(`/login?error=${encodeURIComponent(tokenData.error)}`, request.url)
+        new URL(`/login?error=${encodeURIComponent(tokenData.error.message)}`, request.url)
       )
     }
 
