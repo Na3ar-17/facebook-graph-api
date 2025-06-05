@@ -1,11 +1,11 @@
+import { FacebookService } from '@/services/facebook.service'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
-
-import { FacebookService } from '@/services/facebook.service'
 
 export async function GET() {
   const cookieStore = await cookies()
   const userCookie = cookieStore.get('user')
+
   if (!userCookie) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
@@ -19,6 +19,7 @@ export async function GET() {
 
   const facebookService = new FacebookService()
   const validation = await facebookService.validateAccessToken(token)
+
   if (!validation.isValid) {
     return NextResponse.json({ error: 'Invalid token' }, { status: 401 })
   }
@@ -28,6 +29,6 @@ export async function GET() {
   )
 
   const data = await res.json()
+
   return NextResponse.json(data)
 }
-

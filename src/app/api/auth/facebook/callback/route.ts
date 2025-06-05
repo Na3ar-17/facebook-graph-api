@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { BASE_URL } from '@/constants/api.constant'
+import { BASE_URL, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } from '@/constants/env.constant'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -18,8 +18,8 @@ export async function GET(request: NextRequest) {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: new URLSearchParams({
-        client_id: process.env.FACEBOOK_APP_ID!,
-        client_secret: process.env.FACEBOOK_APP_SECRET!,
+        client_id: FACEBOOK_APP_ID,
+        client_secret: FACEBOOK_APP_SECRET,
         redirect_uri: `${BASE_URL}/api/auth/facebook/callback`,
         code
       })
@@ -34,6 +34,7 @@ export async function GET(request: NextRequest) {
     const userResponse = await fetch(
       `https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${tokenData.access_token}`
     )
+
     const userData = await userResponse.json()
 
     if (userData.error) {

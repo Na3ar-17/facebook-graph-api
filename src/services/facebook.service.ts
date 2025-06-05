@@ -1,3 +1,5 @@
+import { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } from '@/constants/env.constant'
+
 import type { IProfile } from '@/entities/profile.entity'
 
 export interface ITokenValidationResult {
@@ -49,8 +51,9 @@ export class FacebookService {
   async validateAccessToken(accessToken: string): Promise<ITokenValidationResult> {
     try {
       const res = await fetch(
-        `${this.graphApiBaseUrl}/debug_token?input_token=${accessToken}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`
+        `${this.graphApiBaseUrl}/debug_token?input_token=${accessToken}&access_token=${FACEBOOK_APP_ID}|${FACEBOOK_APP_SECRET}`
       )
+
       const data: DebugTokenResponse = await res.json()
 
       if (!res.ok || 'error' in data) {
@@ -60,10 +63,14 @@ export class FacebookService {
         }
       }
 
+      const {
+        data: { expires_at, is_valid, user_id }
+      } = data
+
       return {
-        isValid: data.data.is_valid,
-        userId: data.data.user_id,
-        expiresAt: data.data.expires_at
+        isValid: is_valid,
+        userId: user_id,
+        expiresAt: expires_at
       }
     } catch (error) {
       console.error('validateAccessToken error:', error)
@@ -76,6 +83,7 @@ export class FacebookService {
       const res = await fetch(
         `${this.graphApiBaseUrl}/me?fields=id,name,email,picture&access_token=${accessToken}`
       )
+
       const data: ProfileResponse = await res.json()
 
       if (!res.ok || 'error' in data) {

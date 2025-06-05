@@ -17,7 +17,7 @@ export const Navbar: FC<IProps> = ({ user }) => {
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' })
-    router.push('/login')
+    router.replace('/login')
   }
 
   return (
