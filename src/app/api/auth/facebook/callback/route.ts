@@ -8,7 +8,9 @@ export async function GET(request: NextRequest) {
   const error = searchParams.get('error')
 
   if (error || !code) {
-    return NextResponse.redirect(new URL('/login', request.url))
+    return NextResponse.redirect(
+      new URL(`/login?error=${encodeURIComponent(error || '')}`, request.url)
+    )
   }
 
   try {
@@ -28,7 +30,9 @@ export async function GET(request: NextRequest) {
     const tokenData = await tokenResponse.json()
 
     if (tokenData.error) {
-      return NextResponse.redirect(new URL('/login', request.url))
+      return NextResponse.redirect(
+        new URL(`/login?error=${encodeURIComponent(tokenData.error)}`, request.url)
+      )
     }
 
     const userResponse = await fetch(
@@ -38,7 +42,9 @@ export async function GET(request: NextRequest) {
     const userData = await userResponse.json()
 
     if (userData.error) {
-      return NextResponse.redirect(new URL('/login', request.url))
+      return NextResponse.redirect(
+        new URL(`/login?error=${encodeURIComponent(userData.error)}`, request.url)
+      )
     }
 
     const response = NextResponse.redirect(new URL('/dashboard', request.url))
@@ -62,6 +68,6 @@ export async function GET(request: NextRequest) {
     return response
   } catch (error) {
     console.error('Facebook auth error:', error)
-    return NextResponse.redirect(new URL('/login', request.url))
+    return NextResponse.redirect(new URL(`/login`, request.url))
   }
 }
