@@ -14,14 +14,11 @@
     "<THIRD_PARTY_MODULES>",
     "^@/components/(.*)$",
     "^@/ui/(.*)$",
-    "^@/providers/(.*)$",
     "^@/constants/(.*)$",
-    "^@/config/(.*)$",
-    "^@/hooks/(.*)$",
-    "^@/utils/(.*)$",
-    "^@/api/(.*)$",
-    "^@/server/(.*)$",
-    "^@/entities/(.*)$"
+    "^@/entities/(.*)$",
+    "^@/services/(.*)$",
+    "^@/lib/(.*)$",
+    "^@/types/(.*)$"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,

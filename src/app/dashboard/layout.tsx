@@ -2,6 +2,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import { Navbar } from '@/components/layout/navbar/Navbar'
+
 import { FacebookService } from '@/services/facebook.service'
 
 export default async function DashboardLayout({
