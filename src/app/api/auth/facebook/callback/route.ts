@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   const error = searchParams.get('error')
 
   if (error || !code) {
-    return NextResponse.redirect(new URL('/login?error=auth_failed', request.url))
+    return NextResponse.redirect(new URL('/login', request.url))
   }
 
   try {
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
     const tokenData = await tokenResponse.json()
 
     if (tokenData.error) {
-      return NextResponse.redirect(new URL('/login?error=token_failed', request.url))
+      return NextResponse.redirect(new URL('/login', request.url))
     }
 
     const userResponse = await fetch(
@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
     const userData = await userResponse.json()
 
     if (userData.error) {
-      return NextResponse.redirect(new URL('/login?error=user_failed', request.url))
+      return NextResponse.redirect(new URL('/login', request.url))
     }
 
     const response = NextResponse.redirect(new URL('/dashboard', request.url))
@@ -62,6 +62,6 @@ export async function GET(request: NextRequest) {
     return response
   } catch (error) {
     console.error('Facebook auth error:', error)
-    return NextResponse.redirect(new URL('/login?error=server_error', request.url))
+    return NextResponse.redirect(new URL('/login', request.url))
   }
 }
