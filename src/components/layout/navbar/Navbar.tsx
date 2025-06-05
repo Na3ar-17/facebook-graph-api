@@ -6,10 +6,10 @@ import type { FC } from 'react'
 
 import { Button } from '@/ui/Button'
 
-import type { IUser } from '@/entities/user.entity'
+import type { IProfile } from '@/entities/profile.entity'
 
 interface IProps {
-  user: IUser
+  user: IProfile
 }
 
 export const Navbar: FC<IProps> = ({ user }) => {

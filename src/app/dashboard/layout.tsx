@@ -2,6 +2,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import { Navbar } from '@/components/layout/navbar/Navbar'
+import { FacebookService } from '@/services/facebook.service'
 
 export default async function DashboardLayout({
   children
@@ -15,12 +16,27 @@ export default async function DashboardLayout({
     redirect('/login')
   }
 
-  let user
+  let accessToken = ''
   try {
-    user = JSON.parse(userCookie.value)
+    accessToken = JSON.parse(userCookie.value).accessToken
   } catch {
     redirect('/login')
   }
+
+  const facebookService = new FacebookService()
+  const validation = await facebookService.validateAccessToken(accessToken)
+
+  if (!validation.isValid) {
+    redirect('/login')
+  }
+
+  let user
+  try {
+    user = await facebookService.getUserProfile(accessToken)
+  } catch {
+    redirect('/login')
+  }
+
   return (
     <div className='min-h-screen'>
       <Navbar user={user} />
